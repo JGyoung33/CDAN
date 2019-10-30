@@ -144,7 +144,8 @@ def image_train(resize_size=256, crop_size=224, alexnet=False):
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                    std=[0.229, 0.224, 0.225])
   return  transforms.Compose([
-        transforms.Resize((256,256)),
+        #transforms.Resize((256,256)),
+        ResizeImage(resize_size),
         transforms.RandomResizedCrop(crop_size),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
@@ -164,7 +165,8 @@ def image_test(resize_size=256, crop_size=224, alexnet=False):
   start_last = resize_size - crop_size - 1
  
   return transforms.Compose([
-    transforms.Resize((256,256)),
+    ResizeImage(resize_size),
+    #transforms.Resize((256,256)),
     PlaceCrop(crop_size, start_center, start_center),
     transforms.ToTensor(),
     normalize
